@@ -86,7 +86,6 @@ async function updateAluno(id, data) {
   try {
     await request('PUT', `/alunos/${id}`, data)
     toast('Aluno atualizado com sucesso!')
-    loadAlunos()
   } catch (err) {
     toast(err.message, true)
   }
@@ -128,6 +127,7 @@ document.getElementById('form-emprestimo-create').addEventListener('submit', asy
     toast('Empréstimo registrado!')
     e.target.reset()
     e.target.querySelector('[name="dias_emprestimo"]').value = 7
+    location.reload()
   } catch (err) {
     toast(err.message, true)
   }
@@ -143,6 +143,7 @@ document.getElementById('form-emprestimo-return').addEventListener('submit', asy
     toast('Devolução registrada!')
     e.target.reset()
     e.target.querySelector('[name="valor_multa_diaria"]').value = 2.50
+    location.reload()
   } catch (err) {
     toast(err.message, true)
   }
@@ -175,15 +176,26 @@ async function loadEmprestimoSelects() {
 }
 
 // ---- Tabs ----
+function switchTab(name) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'))
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'))
+  document.querySelector(`.tab[data-tab="${name}"]`).classList.add('active')
+  document.getElementById(`tab-${name}`).classList.add('active')
+  if (name === 'emprestimos') loadEmprestimoSelects()
+  else if (name === 'alunos') loadAlunos()
+}
+
 document.querySelectorAll('.tab').forEach(tab => {
   tab.addEventListener('click', () => {
-    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'))
-    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'))
-    tab.classList.add('active')
-    document.getElementById(`tab-${tab.dataset.tab}`).classList.add('active')
-    if (tab.dataset.tab === 'emprestimos') loadEmprestimoSelects()
+    location.hash = tab.dataset.tab
   })
 })
 
+window.addEventListener('hashchange', () => {
+  const tab = location.hash.replace('#', '') || 'alunos'
+  switchTab(tab)
+})
+
 // ---- Init ----
-loadAlunos()
+const initialTab = location.hash.replace('#', '') || 'alunos'
+switchTab(initialTab)
