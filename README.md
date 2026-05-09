@@ -33,8 +33,6 @@ Servidor disponível em `http://localhost:3000`. O frontend é servido junto na 
 
 | Método | Rota | Descrição |
 |--------|------|-----------|
-| GET | `/` | Health check |
-| GET | `/teste-db` | Testa conexão com o banco |
 | POST | `/api/alunos` | Criar aluno |
 | GET | `/api/alunos` | Listar alunos (`?matricula=XXX` para filtrar) |
 | PUT | `/api/alunos/:id` | Atualizar aluno |
