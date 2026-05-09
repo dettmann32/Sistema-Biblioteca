@@ -18,4 +18,10 @@ async function devolver(id, valor_multa_diaria) {
     .execute('SP_Registrar_Devolucao')
 }
 
-module.exports = { registrar, devolver }
+async function listar() {
+  const pool = await getConnection()
+  const result = await pool.request().query('SELECT id_emprestimo, data_emprestimo, id_aluno, id_exemplar FROM emprestimo WHERE data_devolucao_real IS NULL')
+  return result.recordset
+}
+
+module.exports = { registrar, devolver, listar }

@@ -148,6 +148,32 @@ document.getElementById('form-emprestimo-return').addEventListener('submit', asy
   }
 })
 
+// ---- Selects no Empréstimo ----
+async function loadSelect(selector, labelFn, url) {
+  try {
+    const items = await request('GET', url)
+    const select = document.querySelector(selector)
+    const placeholder = select.querySelector('option')
+    select.innerHTML = ''
+    select.appendChild(placeholder)
+    items.forEach(item => {
+      const opt = document.createElement('option')
+      opt.value = Object.values(item)[0]
+      opt.textContent = labelFn(item)
+      select.appendChild(opt)
+    })
+  } catch (err) {
+    toast('Erro ao carregar ' + selector + ': ' + err.message, true)
+  }
+}
+
+async function loadEmprestimoSelects() {
+  loadSelect('[name="id_aluno"]', a => `${a.nome} (${a.matricula})`, '/alunos')
+  loadSelect('[name="id_exemplar"]', e => `${e.codigo_barras} - ${e.condicao}`, '/exemplares')
+  loadSelect('[name="id_funcionario"]', f => `${f.nome} (${f.cargo})`, '/funcionarios')
+  loadSelect('[name="id_emprestimo"]', e => `#${e.id_emprestimo} - Aluno ${e.id_aluno} (${e.data_emprestimo})`, '/emprestimos')
+}
+
 // ---- Tabs ----
 document.querySelectorAll('.tab').forEach(tab => {
   tab.addEventListener('click', () => {
@@ -155,6 +181,7 @@ document.querySelectorAll('.tab').forEach(tab => {
     document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'))
     tab.classList.add('active')
     document.getElementById(`tab-${tab.dataset.tab}`).classList.add('active')
+    if (tab.dataset.tab === 'emprestimos') loadEmprestimoSelects()
   })
 })
 

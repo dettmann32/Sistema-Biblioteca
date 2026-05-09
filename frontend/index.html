@@ -51,9 +51,15 @@
       <div class="card">
         <h2>Registrar Empréstimo</h2>
         <form id="form-emprestimo-create">
-          <input name="id_aluno" type="number" placeholder="ID do Aluno" required>
-          <input name="id_exemplar" type="number" placeholder="ID do Exemplar" required>
-          <input name="id_funcionario" type="number" placeholder="ID do Funcionário" required>
+          <select name="id_aluno" required>
+            <option value="">Selecione um aluno...</option>
+          </select>
+          <select name="id_exemplar" required>
+            <option value="">Selecione um exemplar...</option>
+          </select>
+          <select name="id_funcionario" required>
+            <option value="">Selecione um funcionário...</option>
+          </select>
           <input name="dias_emprestimo" type="number" placeholder="Dias (padrão 7)" value="7">
           <button type="submit">Registrar</button>
         </form>
@@ -62,7 +68,9 @@
       <div class="card">
         <h2>Registrar Devolução</h2>
         <form id="form-emprestimo-return">
-          <input name="id_emprestimo" type="number" placeholder="ID do Empréstimo" required>
+          <select name="id_emprestimo" required>
+            <option value="">Selecione um empréstimo...</option>
+          </select>
           <input name="valor_multa_diaria" step="0.01" placeholder="Multa diária (padrão 2.50)" value="2.50">
           <button type="submit">Devolver</button>
         </form>

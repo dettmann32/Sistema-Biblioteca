@@ -18,4 +18,13 @@ async function devolver(req, res) {
   }
 }
 
-module.exports = { create, devolver }
+async function list(req, res) {
+  try {
+    const emprestimos = await emprestimoService.listar()
+    res.json(emprestimos)
+  } catch (err) {
+    res.status(500).json({ error: err.message })
+  }
+}
+
+module.exports = { create, devolver, list }
