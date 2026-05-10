@@ -14,7 +14,7 @@
 
   <nav class="tabs">
     <button class="tab active" data-tab="alunos">Alunos</button>
-    <button class="tab" data-tab="emprestimos">Empréstimos</button>
+    <a class="tab" data-tab="emprestimos" href="emprestimos.html">Empréstimos</a>
   </nav>
 
   <main>
@@ -43,37 +43,6 @@
       <div class="card">
         <h2>Alunos</h2>
         <div id="alunos-list"><p class="empty">Nenhum aluno encontrado.</p></div>
-      </div>
-    </section>
-
-    <!-- ============ EMPRESTIMOS ============ -->
-    <section id="tab-emprestimos" class="tab-content">
-      <div class="card">
-        <h2>Registrar Empréstimo</h2>
-        <form id="form-emprestimo-create">
-          <select name="id_aluno" required>
-            <option value="">Selecione um aluno...</option>
-          </select>
-          <select name="id_exemplar" required>
-            <option value="">Selecione um exemplar...</option>
-          </select>
-          <select name="id_funcionario" required>
-            <option value="">Selecione um funcionário...</option>
-          </select>
-          <input name="dias_emprestimo" type="number" placeholder="Dias (padrão 7)" value="7">
-          <button type="submit">Registrar</button>
-        </form>
-      </div>
-
-      <div class="card">
-        <h2>Registrar Devolução</h2>
-        <form id="form-emprestimo-return">
-          <select name="id_emprestimo" required>
-            <option value="">Selecione um empréstimo...</option>
-          </select>
-          <input name="valor_multa_diaria" step="0.01" placeholder="Multa diária (padrão 2.50)" value="2.50">
-          <button type="submit">Devolver</button>
-        </form>
       </div>
     </section>
   </main>

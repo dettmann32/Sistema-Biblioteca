@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema Biblioteca - Empréstimos</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <h1>Sistema Biblioteca</h1>
+    <p>Interface para testar a API</p>
+  </header>
+
+  <nav class="tabs">
+    <a class="tab" href="index.html">Alunos</a>
+    <a class="tab active" href="emprestimos.html">Empréstimos</a>
+  </nav>
+
+  <main>
+    <div class="card">
+      <h2>Registrar Empréstimo</h2>
+      <form id="form-emprestimo-create">
+        <select name="id_aluno" required>
+          <option value="">Selecione um aluno...</option>
+        </select>
+        <select name="id_exemplar" required>
+          <option value="">Selecione um exemplar...</option>
+        </select>
+        <select name="id_funcionario" required>
+          <option value="">Selecione um funcionário...</option>
+        </select>
+        <input name="dias_emprestimo" type="number" placeholder="Dias (padrão 7)" value="7">
+        <button type="submit">Registrar</button>
+      </form>
+    </div>
+
+    <div class="card">
+      <h2>Registrar Devolução</h2>
+      <form id="form-emprestimo-return">
+        <select name="id_emprestimo" required>
+          <option value="">Selecione um empréstimo...</option>
+        </select>
+        <input name="valor_multa_diaria" step="0.01" placeholder="Multa diária (padrão 2.50)" value="2.50">
+        <button type="submit">Devolver</button>
+      </form>
+    </div>
+  </main>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="js/emprestimos.js"></script>
+</body>
+</html>
